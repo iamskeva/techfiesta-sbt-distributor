@@ -22,6 +22,7 @@ import { moduleSchemaFromBase64 } from "@concordium/react-components";
 const page = () => {
   const [nftData, setNftData] = useState<any>(null);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [minted, setMinted] = useState(false);
 
   const {
     connection,
@@ -107,11 +108,13 @@ const page = () => {
         params
       );
       // await completeMint(id);
+      toast.success("SBT mint successful");
+      setMinted(true);
       return transactionHash;
     } catch (error) {
       console.error("Error completing campaign:", error);
-      toast.error("Mint rejected");
-
+      toast.error("SBT Mint failed");
+      setMinted(false);
       throw error;
     }
   };
@@ -132,7 +135,7 @@ const page = () => {
       {nftData && (
         <div className="p-10  flex justify-center items-center">
           <div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center gap-10">
               <p className="text-[30px] font-semibold">
                 Here is your mint link
               </p>
@@ -148,41 +151,38 @@ const page = () => {
               )}
             </div>
             <div className="border p-4 bg-white shadow-lg rounded-lg mt-10">
-              <div className=" flex  flex-col sm:flex-row items-cente gap-4">
+              <div className=" flex  flex-col  items-center gap-4">
                 <Image
                   src={nftData?.display?.url}
                   alt={nftData?.name}
                   width={300}
                   height={300}
                 />
-                <div className="flex flex-col gap-3 justify-between">
-                  <div>
-                    <p className="text-[25px] font-medium mb-4 ">
-                      {nftData?.name}
-                    </p>
-                    <p>{nftData?.description}</p>
-                  </div>
-                  <button
-                    onClick={() => mintNft()}
-                    className="px-6 py-3 bg-blue-500 w-full max-w-[300px] rounded-md text-white"
-                  >
-                    Mint Nft
-                  </button>
-                </div>
-              </div>
-              <div className="border mt-10 p-3 bg-white shadow-lg rounded  flex flex-col gap-2 sm:flex-row  justify-between items-center">
-                <p>
-                  Import NFT Contract in your wallet:{" "}
-                  {String(DEFAULT_CONTRACT_INDEX)}
-                </p>
                 <button
-                  type="button"
-                  onClick={handleCopy}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md font-normal text-sm"
+                  disabled={minted}
+                  onClick={() => mintNft()}
+                  className={`${
+                    minted ? "bg-blue-200 text-white" : "bg-blue-500 text-white"
+                  } border w-full p-3 rounded-md max-w-[300px] `}
                 >
-                  {copySuccess ? "Copied!" : "Copy Contract Index"}
+                  Mint SBT
                 </button>
               </div>
+              {minted && (
+                <div className="border mt-10 p-3 bg-white shadow-lg rounded  flex flex-col gap-2 sm:flex-row  justify-between items-center">
+                  <p>
+                    Import NFT Contract in your wallet:{" "}
+                    {String(DEFAULT_CONTRACT_INDEX)}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="bg-blue-500 text-white px-4 py-2 rounded-md font-normal text-sm"
+                  >
+                    {copySuccess ? "Copied!" : "Copy Contract Index"}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

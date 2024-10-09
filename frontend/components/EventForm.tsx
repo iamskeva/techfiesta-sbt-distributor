@@ -59,7 +59,7 @@ const EventForm = ({
       if (request.ok) {
         setMetadataCID(response.IpfsHash);
         setMetadataUrl(`${GATEWAY_URL}/ipfs/${response.IpfsHash}?`);
-        toast.success("Updloaded file successfully");
+        toast.success("SBT created successfully");
       } else {
         toast.error("Error uploading file");
       }
@@ -167,7 +167,7 @@ const EventForm = ({
           }
         }}
       >
-        Upload Nft
+        Create SBT
       </button>
     </div>
   );

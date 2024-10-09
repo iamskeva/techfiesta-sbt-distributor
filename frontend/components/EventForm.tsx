@@ -44,7 +44,7 @@ const EventForm = ({
           name: values.name,
           description: values.description,
           symbol: values.symbol,
-          decimals: values.decimals,
+          decimals: Number(values.decimals),
           unique: values.unique,
           thumbnail: { url: values.nftImageUrl },
           display: {
@@ -107,7 +107,7 @@ const EventForm = ({
         />
         <ErrorMessage name="description" component={FormikErrorMessage} />
       </div>
-      <div>
+      {/* <div>
         <label
           htmlFor="symbol"
           className="block text-[16px] font-medium text-gray-700"
@@ -123,8 +123,8 @@ const EventForm = ({
           className="border border-gray-300 w-full p-2 rounded-md outline-none mt-2"
         />
         <ErrorMessage name="symbol" component={FormikErrorMessage} />
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <label
           htmlFor="decimals"
           className="block text-[16px] font-medium text-gray-700"
@@ -140,14 +140,14 @@ const EventForm = ({
           className="border border-gray-300 w-full p-2 rounded-md outline-none mt-2"
         />
         <ErrorMessage name="decimals" component={FormikErrorMessage} />
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <div className="flex gap-2">
           <Field type="checkbox" name="unique" id="unique" className="" />
           <label htmlFor="unique">Unique</label>
         </div>
         <ErrorMessage name="unique" component={FormikErrorMessage} />
-      </div>
+      </div> */}
       <ImageUploader setFieldValue={setFieldValue} values={values} />
       <button
         type="button"

@@ -130,51 +130,59 @@ const page = () => {
   return (
     <Suspense fallback={<p>Loading...</p>}>
       {nftData && (
-        <div className="p-10">
-          <div className="flex justify-between items-center">
-            <p className="text-[30px] font-semibold">Here is your mint link</p>
-            {account ? (
-              "Connected"
-            ) : (
-              <button
-                onClick={() => connect?.()}
-                className="px-6 py-3 bg-blue-500  rounded-md text-white"
-              >
-                Connect Wallet
-              </button>
-            )}
-          </div>
-          <div className="border p-4 bg-white shadow-lg rounded-lg mt-10">
-            <div className=" flex  flex-col sm:flex-row items-center gap-4">
-              <Image
-                src={nftData?.display?.url}
-                alt={nftData?.name}
-                width={300}
-                height={300}
-              />
-              <div className="flex flex-col gap-3">
-                <p className="text-[25px] font-medium ">{nftData?.name}</p>
-                <p>{nftData?.description}</p>
+        <div className="p-10  flex justify-center items-center">
+          <div>
+            <div className="flex justify-between items-center">
+              <p className="text-[30px] font-semibold">
+                Here is your mint link
+              </p>
+              {account ? (
+                "Connected"
+              ) : (
                 <button
-                  onClick={() => mintNft()}
-                  className="px-6 py-3 bg-blue-500 w-full max-w-[300px] rounded-md text-white"
+                  onClick={() => connect?.()}
+                  className="px-6 py-3 bg-blue-500  rounded-md text-white"
                 >
-                  Mint Nft
+                  Connect Wallet
+                </button>
+              )}
+            </div>
+            <div className="border p-4 bg-white shadow-lg rounded-lg mt-10">
+              <div className=" flex  flex-col sm:flex-row items-cente gap-4">
+                <Image
+                  src={nftData?.display?.url}
+                  alt={nftData?.name}
+                  width={300}
+                  height={300}
+                />
+                <div className="flex flex-col gap-3 justify-between">
+                  <div>
+                    <p className="text-[25px] font-medium mb-4 ">
+                      {nftData?.name}
+                    </p>
+                    <p>{nftData?.description}</p>
+                  </div>
+                  <button
+                    onClick={() => mintNft()}
+                    className="px-6 py-3 bg-blue-500 w-full max-w-[300px] rounded-md text-white"
+                  >
+                    Mint Nft
+                  </button>
+                </div>
+              </div>
+              <div className="border mt-10 p-3 bg-white shadow-lg rounded  flex flex-col gap-2 sm:flex-row  justify-between items-center">
+                <p>
+                  Import NFT Contract in your wallet:{" "}
+                  {String(DEFAULT_CONTRACT_INDEX)}
+                </p>
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md font-normal text-sm"
+                >
+                  {copySuccess ? "Copied!" : "Copy Contract Index"}
                 </button>
               </div>
-            </div>
-            <div className="border mt-10 p-3 bg-white shadow-lg rounded  flex flex-col gap-2 sm:flex-row  justify-between items-center">
-              <p>
-                Import NFT Contract in your wallet:{" "}
-                {String(DEFAULT_CONTRACT_INDEX)}
-              </p>
-              <button
-                type="button"
-                onClick={handleCopy}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md font-normal text-sm"
-              >
-                {copySuccess ? "Copied!" : "Copy Contract Index"}
-              </button>
             </div>
           </div>
         </div>

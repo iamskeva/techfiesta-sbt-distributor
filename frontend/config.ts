@@ -14,7 +14,8 @@ import {
 
 export const DEFAULT_CONTRACT_INDEX = BigInt(10253);
 export const MAX_CONTRACT_EXECUTION_ENERGY = BigInt(30000);
-export const WEB_URL = "http://localhost:3001";
+// export const WEB_URL = "http://localhost:3001";
+export const WEB_URL = "https://techfiesta-sbt-distributor.vercel.app";
 
 const WALLET_CONNECT_OPTS = {
   projectId: CONCORDIUM_WALLET_CONNECT_PROJECT_ID,
